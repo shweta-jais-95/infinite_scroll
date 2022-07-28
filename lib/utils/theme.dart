@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:infinite_scroll/utils/fontsizes.dart';
-import 'package:infinite_scroll/utils/hive_utility.dart';
 import 'package:infinite_scroll/utils/palette.dart';
 
 class AppTheme {
-  static ThemeData getTheme() {
-    bool isDark = hiveUtility.checkIsDarkMode();
+  static ThemeData getTheme(isDark) {
     return ThemeData(
         primaryColor: Palette.primaryColor,
         hoverColor: Colors.transparent,
@@ -31,11 +29,11 @@ class AppTheme {
             elevation: 1,
             toolbarTextStyle: TextStyle(
                 color: Palette.primaryColor,
-                fontSize: FontSizes.subtitle2,
+                fontSize: FontSizes.subtitle1,
                 fontWeight: FontWeight.w500),
             titleTextStyle: TextStyle(
                 color: Palette.primaryColor,
-                fontSize: FontSizes.headline6,
+                fontSize: FontSizes.subtitle1,
                 //fontFamily: 'Lato',
                 fontWeight: FontWeight.w500),
             actionsIconTheme: IconThemeData(color: Palette.primaryColor)),

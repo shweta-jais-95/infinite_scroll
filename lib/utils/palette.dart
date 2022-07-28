@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Palette {
-  static const bgColor = Colors.white;
+  static const bgColor = Color(0xFFF8F8F8);
   static const dark = Color(0xFF1A1A1A);
   static const dark2 = Color(0xFF2A2A2A);
   static const dark4 = Color(0xFF2F2F2F);
   static const dark6 = Color(0xFF333333);
-  static Color primary70 = Colors.blue.shade700;
-  static Color primary100 = Colors.blue.shade100;
+  static Color primary70 = Colors.blueGrey;
+  static Color primary100 = Colors.blueAccent;
   static Color blue10 = Colors.blue.shade200;
   static const decorumDark4 = Color(0xFF2F2F2F);
-  static Color primaryColor = Colors.blue;
+  static Color primaryColor = Colors.blueAccent;
   static const transparentColor = Color(0xB2000000);
   static Color loginBgColor = const Color(0xFF16A4B5);
   static const Color whiteColor = Colors.white;
@@ -43,7 +43,7 @@ class Palette {
     errorColor = const Color(0xFFdc4e42);
 
     if (isDark) {
-      primaryColor = primary70;
+      primaryColor = primary100;
       textColor = whiteColor;
       iconColor = whiteColor;
       fabIconColor = blackColor;
@@ -52,7 +52,7 @@ class Palette {
       loadingViewBgColor = dark;
     } else {
       loadingViewBgColor = bgColor;
-      primaryColor = primary100;
+      primaryColor = primary70;
       fabIconColor = whiteColor;
       textColor = const Color(0xFF1A1A1A);
       iconColor = Colors.black87;

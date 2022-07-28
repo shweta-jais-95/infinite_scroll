@@ -28,20 +28,18 @@ class _MyAppState extends State<MyApp> {
   var widgetKey = Key(CommonOps.generateId([]));
   @override
   Widget build(BuildContext context) {
-    bool wasDark = hiveUtility.checkIsDarkMode();
     return ValueListenableBuilder(
       valueListenable: Hive.box(HiveBoxNames.darkMode).listenable(),
       builder: (BuildContext context, Box? box, widget) {
         bool isDark = box?.get(HiveBoxKeys.isDark, defaultValue: false);
         Palette.setColor(isDark);
-        if (wasDark != isDark) {
-          widgetKey = Key(CommonOps.generateId([]));
-          wasDark = isDark;
-        }
         return MaterialApp(
           title: Strings.appName,
+          key: Key(CommonOps.generateId([])),
           debugShowCheckedModeBanner: false,
-          theme: AppTheme.getTheme(),
+          theme: AppTheme.getTheme(false),
+          darkTheme: AppTheme.getTheme(true),
+          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
           home: MyHomePage(),
         );
       },
