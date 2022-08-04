@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.getTheme(false),
           darkTheme: AppTheme.getTheme(true),
           themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-          home: MainScreen(key: Key(CommonOps.generateId([]))),
+          home: const MainScreen(),
         );
       },
     );

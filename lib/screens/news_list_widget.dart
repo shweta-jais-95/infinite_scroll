@@ -1,19 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll/components/circular_progressbar_indicator_view.dart';
+import 'package:infinite_scroll/components/no_data_show_view.dart';
 import 'package:infinite_scroll/datamodel.dart/news.dart';
 import 'package:infinite_scroll/notifiers/news_list_notifier.dart';
+import 'package:infinite_scroll/utils/fontsizes.dart';
+import 'package:infinite_scroll/utils/palette.dart';
 
 class NewsListViewWidget extends StatefulWidget {
   final NewsListNotifier? newsNotifier;
-  final bool showWebView;
-  final bool showCustomer;
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
 
   const NewsListViewWidget({
     required this.newsNotifier,
     Key? key,
-    required this.showWebView,
     required this.refreshIndicatorKey,
-    required this.showCustomer,
   }) : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class NewsListViewWidgetState extends State<NewsListViewWidget> {
   }
 
   _fetchList() {
-    widget.newsNotifier?.fetchNextNews(widget.showWebView);
+    widget.newsNotifier?.fetchNextNews();
   }
 
   @override
@@ -57,25 +58,26 @@ class NewsListViewWidgetState extends State<NewsListViewWidget> {
   @override
   Widget build(BuildContext context) {
     var length = widget.newsNotifier?.news.length ?? 0;
-    bool isLoading = widget.newsNotifier?.isFetchingActivity != false;
     return RefreshIndicator(
         key: widget.refreshIndicatorKey,
         onRefresh: () {
           return _refresh();
         },
-        child: isLoading
-            ? Text("Loading")
+        child: widget.newsNotifier?.isFetchingActivity != false
+            ? const CircularProgressBarIndicatorView()
             : ListView.builder(
                 controller: _scrollController,
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: length + 1,
                 itemBuilder: (context, i) {
                   if (widget.newsNotifier?.news.isEmpty == true) {
-                    return Text("No data");
+                    return const NoDataToShowView();
                   }
                   if (i == length) {
                     if (widget.newsNotifier?.hasNext == true) {
-                      return Text("Loading more data");
+                      return const Center(
+                        child: CircularProgressBar(),
+                      );
                     } else {
                       return Container();
                     }
@@ -91,6 +93,42 @@ class NewsListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("item");
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+        child: Card(
+          child: Column(
+            children: <Widget>[
+              if (news?.urlToImage?.isNotEmpty == true)
+                CachedNetworkImage(
+                  imageUrl: news?.urlToImage ?? "",
+                  placeholder: (context, url) => const Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: CircularProgressBar(),
+                  ),
+                  errorWidget: (context, url, error) => Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Center(
+                      child: Icon(
+                        Icons.error,
+                        color: Palette.textColor,
+                      ),
+                    ),
+                  ),
+                ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text("${news?.title}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Palette.textColor,
+                        fontSize: FontSizes.subtitle1)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

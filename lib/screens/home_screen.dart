@@ -19,12 +19,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final themeKey = Key(Strings.theme);
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   NewsListNotifier? newsListNotifier;
   final newsListNotifierProvider =
       ChangeNotifierProvider((ref) => NewsListNotifier());
@@ -83,9 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
           body: NewsListViewWidget(
               refreshIndicatorKey: refreshIndicatorKey,
-              showWebView: false,
-              newsNotifier: newsListNotifier,
-              showCustomer: false));
+              newsNotifier: newsListNotifier));
     });
   }
 }

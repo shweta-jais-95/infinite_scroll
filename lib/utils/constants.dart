@@ -5,3 +5,7 @@ class HiveBoxNames {
 class HiveBoxKeys {
   static const isDark = "isDark";
 }
+
+class AppConstant {
+  static const double buttonHeight = 38;
+}

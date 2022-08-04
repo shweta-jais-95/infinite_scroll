@@ -20,7 +20,7 @@ class ApiService {
 
   static Future<GetNewsResponse> fetchNews(int pageNumber) async {
     try {
-      const pageSize = 45;
+      const pageSize = 15;
       final response = await get(
         Uri.parse(
             "https://newsapi.org/v2/everything?q=bitcoin&apiKey=598e0b586c33478abbb6ec3b409b1937&pageSize=${pageSize + 1}&page=$pageNumber"),
@@ -28,7 +28,7 @@ class ApiService {
       var data = json.decode(response.body);
       List<News> fetchedNews = News.parseList(data);
       bool hasNextData = false;
-      if (fetchedNews.length == pageSize) {
+      if (fetchedNews.length > pageSize) {
         hasNextData = true;
       }
       var news = fetchedNews.sublist(
