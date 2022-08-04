@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll/components/icon_button_view.dart';
 
-fetchAppBar(String? title, BuildContext context,
+fetchAppBar(String? title,
     {List<Widget>? actions, bool? showCrossIcon, required bool showLeading}) {
   return AppBar(
       centerTitle: false,

@@ -4,6 +4,7 @@ import 'package:infinite_scroll/components/circular_progressbar_indicator_view.d
 import 'package:infinite_scroll/components/no_data_show_view.dart';
 import 'package:infinite_scroll/datamodel.dart/news.dart';
 import 'package:infinite_scroll/notifiers/news_list_notifier.dart';
+import 'package:infinite_scroll/screens/view_screen.dart';
 import 'package:infinite_scroll/utils/fontsizes.dart';
 import 'package:infinite_scroll/utils/palette.dart';
 
@@ -94,7 +95,12 @@ class NewsListItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (selectEntryContext) => const ViewScreen()));
+      },
       child: Container(
         margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Card(
