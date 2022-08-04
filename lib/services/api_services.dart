@@ -1,23 +1,9 @@
 import 'package:infinite_scroll/datamodel.dart/news.dart';
 import 'package:infinite_scroll/datamodel.dart/news_reponse.dart';
-import 'package:infinite_scroll/datamodel.dart/photo.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 
 class ApiService {
-  static Future<List<Photo>> fetchPhotos(int pageNumber) async {
-    try {
-      final response = await get(
-        Uri.parse(
-            "https://jsonplaceholder.typicode.com/photos?_page=$pageNumber"),
-      );
-      List<Photo> fetchedPhotos = Photo.parseList(json.decode(response.body));
-      return fetchedPhotos;
-    } catch (e) {
-      return [];
-    }
-  }
-
   static Future<GetNewsResponse> fetchNews(int pageNumber) async {
     try {
       const pageSize = 15;
